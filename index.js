@@ -105,7 +105,7 @@ modalContent.querySelector("#cancle").onclick = onCancel;
     );
     card.innerHTML = ` 
       <div>
-        <p class="text-sm font-medium">${item.name}</p>
+        <p class="text-sm font-medium">${item.title}</p>
         <div class="flex items-center gap-2 mt-1">
           <img src="${item.thumbnail}" class="w-10" />
           <span class="text-xs text-gray-500">Qty: ${item.quantity}</span>
