@@ -90,28 +90,28 @@
 </div>
     </main>
 
-     <footer
-      class="border-t border-gray-200 py-5 fixed bottom-0 left-0 w-full bg-white"
+    <footer class="border-t border-gray-200 py-5 fixed bottom-0 left-0 w-full bg-white px-4">
+  <div class="max-w-5xl mx-auto flex items-center justify-between gap-5">
+    
+    <!-- ဘယ်ဘက် အပိုင်း (တစ်စုတည်း ဖြစ်နေစေရန်) -->
+    <div>
+      <p class="text-xs">Built with OnchainKit</p>
+      <p class="text-[8px] mt-1.5">Privacy Policy</p>
+    </div>
+
+   
+    <p class="text-lg font-bold px-3 py-2 -translate-x-8">TOTAL 0.00 USDC</p>
+
+    <button
+      id="pay-with-crypto"
+      class="font-semibold py-2.5 hover:bg-[#003fc6] hover:cursor-pointer flex items-center gap-3 text-white px-6 rounded-lg bg-[#034be7]"
     >
-      <div class="flex items-center justify-between max-w-5xl mx-auto">
-        <div>
-          <p class="text-xs">Built with OnchainKit</p>
-          <p class="text-[8px] mt-1.5">Privacy Policy</p>
-        </div>
+      <img src="./images/cryto.svg" class="size-4" alt="" />
+      <span> Pay with Crypto </span>
+    </button>
 
-        <p class="text-lg font-bold">TOTAL 0.00 USDC</p>
-
-        <div>
-          <button
-            id="pay-with-crypto"
-            class="font-semibold py-2.5 hover:bg-[#003fc6] hover:cursor-pointer flex items-center gap-3 text-white px-6 rounded-lg bg-[#034be7]"
-          >
-            <img src="./images/cryto.svg" class="size-4" alt="" />
-            <span> Pay with Cryto </span>
-          </button>
-        </div>
-      </div>
-    </footer>
+  </div>
+</footer>
 
      <div
       id="modal"
