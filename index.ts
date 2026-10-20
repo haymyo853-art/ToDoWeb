@@ -1,17 +1,27 @@
-/** @format */
 
-const payBtn = document.querySelector("#pay-with-crypto");
-const modal = document.querySelector("#modal");
-const content = document.querySelector("#content");
-const modalContent = document.querySelector("#modalContent");
+/** @format */
+import type { IProduct , IProductWithQuantity } from "./type";
+const payBtn = document.querySelector("#pay-with-crypto") as HTMLButtonElement;
+const modal = document.querySelector("#modal") as HTMLDivElement;
+const content = document.querySelector("#content") as HTMLDivElement ;
+const modalContent = document.querySelector("#modalContent") as HTMLDivElement;
+
+// Shape of a product once it's been added to the cart
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+  quantity: number;
+}
 
 // Stores cart state items as: { id, name, price, currency, image, quantity }
-let addToCarts = [];
+let addToCarts: IProductWithQuantity[] = [];
 
-const createCard = (product) => {
+const createCard = (product : IProduct) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("cardContainer");
-  cardContainer.dataset.productId = product.id;
+  cardContainer.dataset.productId = `${product.id}`;
 
   const productName = document.createElement("p");
   productName.classList.add("text-xs");
@@ -38,8 +48,8 @@ const createCard = (product) => {
   content.appendChild(cardContainer);
 
   // Scoped Event Target Selection
-  const addBtn = cardFooter.querySelector(".btn-plus");
-  const minusBtn = cardFooter.querySelector(".btn-minus");
+  const addBtn = cardFooter.querySelector(".btn-plus") as HTMLButtonElement;
+  const minusBtn = cardFooter.querySelector(".btn-minus") as HTMLButtonElement;
 
   addBtn.addEventListener("click", () => {
     changeQuantity(product, 1);
@@ -51,7 +61,7 @@ const createCard = (product) => {
 };
 
 // Unified state modifier function handles addition and reduction cleanly
-const changeQuantity = (product, change) => {
+const changeQuantity = (product : IProduct, change : number) => {
   const cartItem = addToCarts.find((item) => item.id === product.id);
 
   if (cartItem) {
@@ -68,7 +78,8 @@ const changeQuantity = (product, change) => {
   // Synchronize main page display counters
   const updatedItem = addToCarts.find((item) => item.id === product.id);
   const displayValue = updatedItem ? updatedItem.quantity : 0;
-  document.querySelector(`#price-${product.id}`).textContent = displayValue;
+ const displayElement = document.querySelector(`#price-${product.id}`) as HTMLParagraphElement;
+ displayElement.textContent=`${displayValue}`;
 
   // Sync up the checkout overlay window layout
   renderModal();
@@ -86,7 +97,7 @@ const renderModal = () => {
     </div>
   </div>
 `;
-modalContent.querySelector("#cancle").onclick = onCancel;
+
 
   if (addToCarts.length === 0) {
     modalContent.innerHTML += `<p class="text-sm text-gray-500 py-4 text-center">Your cart is empty.</p>`;
@@ -123,7 +134,7 @@ modalContent.querySelector("#cancle").onclick = onCancel;
       </div>`;
 
     // Hook up minus controls internally inside checkout overview container layout targets
-    card.querySelector(".btn-modal-minus").addEventListener("click", () => {
+    card.querySelector(".btn-modal-minus")?.addEventListener("click", () => {
       changeQuantity(item, -1);
     });
 
@@ -146,7 +157,7 @@ const showLoading = () => {
 };
 
 const hideLoading = () => {
-  document.querySelector("#loading").remove();
+  document.querySelector("#loading")?.remove();
   content.classList.add("grid");
 };
 
@@ -184,7 +195,7 @@ window.onload = async () => {
 
   const { products } = await getProducts();
 
-  products.forEach((product) => {
+  products.forEach((product : IProduct) => {
     createCard(product);
   });
   renderModal();
@@ -209,8 +220,9 @@ const onCancel = () => {
   modal.classList.remove("flex");
   modal.classList.add("hidden");
 };
-modalContent.addEventListener("click", (event) => {
-  if (event.target.closest("#cancle")) {
+modalContent.addEventListener("click", (event : MouseEvent ) => {
+  const target=event.target as HTMLElement;
+  if (target.closest("#cancle")) {
     onCancel();
   }
 });

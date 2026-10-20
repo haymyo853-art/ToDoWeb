@@ -315,6 +315,9 @@
   .animate-pulse {
     animation: var(--animate-pulse);
   }
+  .\[scrollbar-gutter\:stable\] {
+    scrollbar-gutter: stable;
+  }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -459,6 +462,9 @@
   }
   .pt-\[5\.5rem\] {
     padding-top: 5.5rem;
+  }
+  .pr-6 {
+    padding-right: calc(var(--spacing) * 6);
   }
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
